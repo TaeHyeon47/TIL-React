@@ -22,6 +22,10 @@ const ExpenseItem = (props) => {
   //   const expenseTitle = 'Car Insurance';
   //   const expenseAmount = 294.67;
 
+  const year = props.date.getFullYear();
+  const month = props.date.toLocaleString('ko-KR', { month: 'long' });
+  const day = props.date.toLocaleString('ko-KR', { day: '2-digit' });
+
   return (
     //  <div className='expense-item'>
     //    {/* date는 expenseDate만 사용하면 오류가 난다. */}
@@ -40,7 +44,13 @@ const ExpenseItem = (props) => {
     //  </div>
 
     <div className='expense-item'>
-      <div>{props.date.toISOString()}</div>
+      <div>
+        {/* toLocaleString() 자바스크립트 내장 함수 */}
+        <div>{year}</div>
+        <div>{month}</div>
+        <div>{day}</div>
+      </div>
+
       <div className='expense-item__description'>
         <h2>{props.title}</h2>
         <div className='expense-item__price'>${props.amount}</div>
