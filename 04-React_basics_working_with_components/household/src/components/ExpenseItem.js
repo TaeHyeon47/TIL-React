@@ -2,7 +2,7 @@
 // A Component in React is just a JavaScript function.
 // A special kind of function special regarding what it returns
 // that it does return this JSX code, but other than that,
-
+import Card from './Card';
 import ExpenseDate from './ExpenseDate';
 import React from 'react';
 import './ExpenseItem.css';
@@ -40,13 +40,19 @@ const ExpenseItem = (props) => {
     //    </div>
     //  </div>
 
-    <div className='expense-item'>
+    // // I'm setting a class named prop and actually at the moment, this won't do anything.
+    // But I'm not setting a children prop.
+
+    // between the opening and closing tags of your custom component.
+    // This content between the opening and closing card tag. That is what will be available on props children inside of that card.
+
+    <Card className='expense-item'>
       <ExpenseDate date={props.date} />
       <div className='expense-item__description'>
         <h2>{props.title}</h2>
         <div className='expense-item__price'>${props.amount}</div>
       </div>
-    </div>
+    </Card>
   );
 };
 
