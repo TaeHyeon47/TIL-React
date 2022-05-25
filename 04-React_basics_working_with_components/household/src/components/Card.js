@@ -24,6 +24,10 @@ import './Card.css';
 // between the opening and closing tags of your custom component.
 // This content between the opening and closing card tag. That is what will be available on props children inside of that card.
 
+// These custom components are not really HTML elements, which end up on the screen, you just use them in your code
+// because, ultimately, every custom component you build either uses these built in HTML elements
+// if you drill into your components deeply enough will end up using these built in elements.
+
 ////////////////////////////////////////////////////////////////////////////////
 ///// Card와 같은 커스텀 wrappers 사용하여 중복되는 CSS 값을 없앨 수 있다!!!!!!!!!!!  //////
 function Card(props) {
