@@ -27,6 +27,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // index.html의 "<div id="root"></div>"는 최종적으로 <App />에 랜더링 된다.
 root.render(
   <React.StrictMode>
+    {/* App컴포넌트부터 콜링해서, JSX코드에 컴포넌트가 없을때까지 계속 콜링하면서 불러오는게 리엑트이다. */}
     <App />
   </React.StrictMode>
 );

@@ -18,13 +18,33 @@ import './ExpenseItem.css';
 // we get key-value pairs in this props object here which is passed in by React automatically.
 // The keys will be the attribute names defined here(title={expenses[0].title에 앞에붙은 title이 attribute임, {}안에 들어가는 것이 value임})
 const ExpenseItem = (props) => {
-  // 일반적인 자바스크립트 변수를 선언해서 사용할 수도 있긴 있다.
+  // 리엑트에서도 일반적인 자바스크립트 변수를 선언해서 사용할 수도 있긴 있다.
   //   const expenseDate = new Date(2021, 2, 28);
   //   const expenseTitle = 'Car Insurance';
   //   const expenseAmount = 294.67;
 
+  // React에서는 아래와 같은 방식으로 작동하지 않는다. 컴포넌트는 결국 Function이다. JSX를 리턴하는 특별한 Function이다.
+  // Function이기 때문에 someone has to call it, and you might notice that we never called our component functions,
+  // instead we just used these functions On Expenses.js like HTML elements in JSX code.
+  // Under the hood this is almost like a function call.
+  // By using our components in JSX code, we make React aware of our component functions.
+  // And these component functions stand to return JSX code, which is all the evaluated,
+  // up until there's no more JSX code to be evaluated.
+  // So react keeps on calling any component functions it encounters in JSX,
+  // in their JSX code until there are no more functions left.
+  // The only problem with that is that react never repeats that.
+  // React goes through all of that when the application is initially rendered.
+  // 위으 사항 때문에 State 같은 상태관리가 나왔다.
+
+  // let title = props.title;
+  // const clickHandler = () => {
+  //   title = 'Updated!';
+  //   console.log(title);
+  // };
+
   const clickHandler = () => {
-    console.log('Clicked!!!!');
+    title = 'Updated!';
+    console.log(title);
   };
 
   return (
@@ -79,9 +99,7 @@ const ExpenseItem = (props) => {
       To all these built-in HTML elements, we can add supported event listeners basically.
       on입력하고 자동완성으로 나오는 이벤트를 모두 사용하면 된다.
       */}
-      <button on onClick={clickHandler}>
-        Change Title
-      </button>
+      <button onClick={clickHandler}>Change Title</button>
     </Card>
   );
 };

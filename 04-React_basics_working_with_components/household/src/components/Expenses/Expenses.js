@@ -19,6 +19,15 @@ const Expenses = (props) => {
         amount={props.items[0].amount}
         date={props.items[0].date}
       />
+      {/* 
+      Under the hood this is almost like a function call.
+      We make react aware of the Expenseitem function.
+      By using our components in JSX code, we make React aware of our component functions.
+      And whenever react evaluates this JSX code, it will call these component functions.
+
+
+
+      */}
       <ExpenseItem
         title={props.items[1].title}
         amount={props.items[1].amount}
