@@ -1,4 +1,3 @@
-import React from 'react';
 import './Card.css';
 
 // A card component could now do one main thing.
@@ -27,6 +26,8 @@ import './Card.css';
 // These custom components are not really HTML elements, which end up on the screen, you just use them in your code
 // because, ultimately, every custom component you build either uses these built in HTML elements
 // if you drill into your components deeply enough will end up using these built in elements.
+
+// JSX 코드는 브라우저에서 지원되지 않기 때문에 '개발자 도구 > 소스'에서 확인하면, 기존 작성한 JSX 코드가 아니라 일반 자바스크립트가 보이는 것이다.
 
 ////////////////////////////////////////////////////////////////////////////////
 ///// Card와 같은 커스텀 wrappers 사용하여 중복되는 CSS 값을 없앨 수 있다!!!!!!!!!!!  //////
