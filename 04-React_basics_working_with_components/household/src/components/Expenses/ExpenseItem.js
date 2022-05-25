@@ -4,7 +4,7 @@
 // that it does return this JSX code, but other than that,
 import Card from '../UI/Card';
 import ExpenseDate from './ExpenseDate';
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseItem.css';
 
 // Props simply stands for properties.
@@ -42,9 +42,25 @@ const ExpenseItem = (props) => {
   //   console.log(title);
   // };
 
+  // useState는 특별한 변수를 생성하기 때문에 초기값을 넣어줘야한다. []는 Array destructuring이다.
+  // it also returns a function which we can then call to assign a new value to that variable.
+  // To assign a new value to that variable. So we'll not be assigning values like this
+  // Instead, we will be assigning new values by calling a function.
+  // That's just how this state variable thing works.
+  // And for that useState actually returns an array
+  // where the first value is the variable itself, And the second element in the array is that updating function.
+  // The first element, as I just said, is a point at that managed value.
+  // The second element here is a function which we can later call to set a new title.
+  // And useState always returns an array with exactly two elements.
+  const [title, setTitle] = useState(props.title);
+
   const clickHandler = () => {
-    title = 'Updated!';
-    console.log(title);
+    // setTitle(state updating function)으로 새로 변수를 입력하게(콜링하게) 되면, 여기 컴포넌트(ExpenseItem)가 다시한번 실행된다!
+    // 다른 컴포넌트가 아니라 여기만 실행된다.
+    setTitle('Updated!');
+    // State updating function을 사용해도 바로 값이 변경되는 것이 아니다.
+    // but instead schedules this state update.
+    console.log(title); // 여기를 넘어가면 기존 값이 변경된다.
   };
 
   return (
@@ -73,7 +89,7 @@ const ExpenseItem = (props) => {
     <Card className='expense-item'>
       <ExpenseDate date={props.date} />
       <div className='expense-item__description'>
-        <h2>{props.title}</h2>
+        <h2>{title}</h2>
         <div className='expense-item__price'>${props.amount}</div>
       </div>
       {/* 
