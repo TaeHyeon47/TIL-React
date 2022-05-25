@@ -23,6 +23,10 @@ const ExpenseItem = (props) => {
   //   const expenseTitle = 'Car Insurance';
   //   const expenseAmount = 294.67;
 
+  const clickHandler = () => {
+    console.log('Clicked!!!!');
+  };
+
   return (
     //  <div className='expense-item'>
     //    {/* date는 expenseDate만 사용하면 오류가 난다. */}
@@ -52,6 +56,32 @@ const ExpenseItem = (props) => {
         <h2>{props.title}</h2>
         <div className='expense-item__price'>${props.amount}</div>
       </div>
+      {/* 
+      In React, we add an event listener by going to the JSX element, like this button. 
+      And there we add a special prop. But now it's not a prop which sets some value
+      for this button, but instead it's a prop which starts with on.
+      Because React exposes all these default events as props which start with on.
+      All these event handler props, want a function as a value, a function passed as a value for onClick
+      which then is executed when that event occurs.
+      we can create an anonymous arrow function like this. "onClick={() => {console.log('Clicked!')}}"
+      */}
+      {/* 
+      onClick에 들어가는 함수에 ()을 넣어서 실행시키면, JSX코드가 Return될때 같이 파싱이되면서 함수가 실행되지 않는다.
+      And that's important, by the way, we just point at it. We don't execute() it here.
+      You don't add parentheses here.
+      Because if you would add parentheses here, 
+      JavaScript would execute this when this line of code is being parsed. when the JSX code is returned.
+      So it's then not executing clickHandler when the click occurs but when this JSX code is evaluated,
+      and that would be too early.
+      That's why instead we just point at the clickHandler. We pass a pointer at this function as a value to onClick,
+      */}
+      {/* 
+      To all these built-in HTML elements, we can add supported event listeners basically.
+      on입력하고 자동완성으로 나오는 이벤트를 모두 사용하면 된다.
+      */}
+      <button on onClick={clickHandler}>
+        Change Title
+      </button>
     </Card>
   );
 };

@@ -67,3 +67,25 @@ const App = () => {
 };
 
 export default App;
+
+/// 퀴즈 ////
+// Which kind of code do you write when using React.js?
+// Declarative JavaScript Code
+
+// What does "declarative" mean?
+// You define the desired outcome (e.g a target UI) and let the library(React) figure out the steps.
+
+// What is a "React Component"?
+// It's a JavaScript function which typically returns HTML(JSX) code that should be displayed.
+
+// Which statement is correct?
+// With React, you build a component tree with one root component that's mounted into a DOM node.
+
+// What does "component tree" mean?
+// It means that you have a root node which then has more components nested beneath it.
+
+// How do you pass data between components?
+// Via "custom HTML attributes" (better known as "props")
+
+// How can you output dynamic data in React components (i.e. in the returned JSX code)?
+// You can use single curly braces (opening & closing) with any JS expression between them.
