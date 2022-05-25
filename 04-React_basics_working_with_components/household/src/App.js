@@ -12,7 +12,8 @@ import Expenses from './components/Expenses/Expenses';
 // Sometimes however, you wanna have a component where you don't configure everything through props
 // but where instead you're able to pass content between the opening and closing tags of that component.
 
-function App() {
+// 리엑트에서 컴포넌트 함수를 Arrow로 사용할 수 있다. 차이점은 없으며 오직 자신의 선호에만 달려있다.
+const App = () => {
   // const expenses = [
   //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
   //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
@@ -63,6 +64,6 @@ function App() {
       <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;

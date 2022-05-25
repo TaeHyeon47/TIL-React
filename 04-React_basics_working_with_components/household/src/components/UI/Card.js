@@ -31,11 +31,11 @@ import './Card.css';
 
 ////////////////////////////////////////////////////////////////////////////////
 ///// Card와 같은 커스텀 wrappers 사용하여 중복되는 CSS 값을 없앨 수 있다!!!!!!!!!!!  //////
-function Card(props) {
+const Card = (props) => {
   // Card 컴포넌트를 wrappers 용도로 사용하는 곳에서 Card에 className을 넣으면 혼동되어 오류가 발생한다.
   // 따라서 아래의 문장을 넣어서 여러 클래스가 적용될 수 있도록 해야한다.
   const classes = 'card ' + props.className;
   return <div className={classes}>{props.children}</div>;
-}
+};
 
 export default Card;
