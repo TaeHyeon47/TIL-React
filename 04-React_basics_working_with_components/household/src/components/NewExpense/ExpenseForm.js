@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = () => {
+  // useState에 초기값은 ''으로 String으로 저장한다.
+  // onChage의 event.target.value 값이 항상 String으로 저장되기 때문이다.
+  // Amount number가 들어가는 곳도 String으로 만들었다.
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
+
   const titleChangeHandler = (event) => {
-    console.log(event.target.value);
+    setEnteredTitle(event.target.value);
+  };
+
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
+
+  const DateChangeHandler = (event) => {
+    setEnteredDate(event.target.value);
   };
 
   return (
@@ -17,11 +32,21 @@ const ExpenseForm = () => {
         <div className='new-expense__control'>
           <label htmlFor=''>Amount</label>
           {/* 'min' and 'step' are just default HTML attributes for input elements */}
-          <input type='number' min='0.01' step='0.01' />
+          <input
+            type='number'
+            onChange={titleChangeHandler}
+            min='0.01'
+            step='0.01'
+          />
         </div>
         <div className='new-expense__control'>
           <label htmlFor=''>Date</label>
-          <input type='date' min='2019-01-01' max='2022-12-31' />
+          <input
+            type='date'
+            onChange={titleChangeHandler}
+            min='2019-01-01'
+            max='2022-12-31'
+          />
         </div>
       </div>
       <div className='new-expense__actions'>
