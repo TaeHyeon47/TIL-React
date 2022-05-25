@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 
 ///////////////////////////////////////////////////////////
@@ -60,7 +61,7 @@ const App = () => {
   // 옛날 방식의 React.createElement를 보면 왜 return할때 1개의 요소로 감싸야하는지 알수 있다
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <NewExpense />
       <Expenses items={expenses} />
     </div>
   );
