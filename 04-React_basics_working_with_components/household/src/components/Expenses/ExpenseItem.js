@@ -2,7 +2,7 @@
 // A Component in React is just a JavaScript function.
 // A special kind of function special regarding what it returns
 // that it does return this JSX code, but other than that,
-import Card from './Card';
+import Card from '../UI/Card';
 import ExpenseDate from './ExpenseDate';
 import React from 'react';
 import './ExpenseItem.css';
