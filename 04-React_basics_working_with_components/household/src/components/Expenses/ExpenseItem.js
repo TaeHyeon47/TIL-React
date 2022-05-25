@@ -52,7 +52,23 @@ const ExpenseItem = (props) => {
   // The first element, as I just said, is a point at that managed value.
   // The second element here is a function which we can later call to set a new title.
   // And useState always returns an array with exactly two elements.
+
+  // useState에 const를 사용하는 이유.
+  // this updated title is fetched from React, which manages the State for us.
+  // Basically we go to React and say, "Hey please give me that latest title State which I told you to manage for me."
+  // And React provides us this latest State in this array which useState always returns.
+  // So we always get a brand new snapshot of that State when this component function re-executes.
+  // He special thing is that React keeps track of when we call useState in a given component instance for the first time.
+  // And when we call it for the first time ever it'll take that argument as an initial value.
+  // it'll take that argument(props.title) as an initial value.
+  // But if a component is then re-executed because of such a State change, for example,
+  // React will not reinitialize the State(props.title).
+  // Instead, it will detect that this State had been initialized in the past, and it will just grab the latest State.
+  // which is based on some State update, for example, and give us that State instead.
+  // So this initial value(props.title) is really only considered when this component function is being executed
+  // for a given component instance.
   const [title, setTitle] = useState(props.title);
+  console.log('ExpenseItem.js evaluated by React');
 
   const clickHandler = () => {
     // setTitle(state updating function)으로 새로 변수를 입력하게(콜링하게) 되면, 여기 컴포넌트(ExpenseItem)가 다시한번 실행된다!
@@ -121,3 +137,14 @@ const ExpenseItem = (props) => {
 };
 
 export default ExpenseItem;
+
+// const와 useState에 대해서 자세히...
+// useState registers some State so some value as a State for the component in which it is being called.
+// It registers it for a specific component instance.
+// For example, ExpenseItem in Expenses.js is being used four times, right?
+// Now, every item receives its own separate State which is detached from the other States.
+// We have one ExpenseItem definition here, but then this function is basically called four times
+// And every time it's called, a new separate State is created of course in the same way
+// but managed independently by React. It's on a per component instance basis.
+// So we have separate States even if we create a component more than once.
+//
