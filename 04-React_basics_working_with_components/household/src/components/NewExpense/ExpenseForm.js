@@ -34,10 +34,39 @@ const ExpenseForm = () => {
   const amountChangeHandler = (event) => {
     // setEnteredAmount(event.target.value);
 
-    setUserInput({
-      ...userInput,
-      enteredAmount: event.target.value,
+    // whenever you update state and you depend on the previous state,
+    // but also if you would be managing a counter which you increment by one, for example,
+    // whenever you update your state and you depend on the previous state,
+    // you should not do it like this but you should use an alternative form
+    // of this state updating function. Instead of calling it like this,
+
+    // setUserInput({
+    //   ...userInput,
+    //   enteredAmount: event.target.value,
+    // });
+
+    // you should call it and pass in a function to that function.
+    // So you call the setUserInput function and you pass a function to it,
+    // And it will receive the previous state snapshot
+    // and now here, we should return the new state snapshot.
+    // In many cases, both will work fine, but keep in mind that I mentioned
+    // that Reacts schedules state updates, it doesn't perform them instantly.
+    // And therefore, theoretically, if you schedule a lot of state updates at the same time,
+    // you could be depending on an outdated or incorrect state snapshot
+    // if you use this approach (...userInput을 사용한 접근법).
+    // ㅑn this inner function will always be the latest state snapshot,
+    // keeping all scheduled state updates in mind. So this is the safer way
+    // to ensure that you always operate on the latest state snapshot.
+
+    setUserInput((prevState) => {
+      return { ...prevState, enteredAmount: event.target.value };
     });
+
+    // In many cases, both will work fine, but keep in mind that I mentioned
+    // that Reacts schedules state updates, it doesn't perform them instantly.
+    // And therefore, theoretically, if you schedule a lot of state updates at the same time,
+    // you could be depending on an outdated or incorrect state snapshot
+    // if you use this approach (...userInput을 사용한 접근법).
   };
 
   const DateChangeHandler = (event) => {
