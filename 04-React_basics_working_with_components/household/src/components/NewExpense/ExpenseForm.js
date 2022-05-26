@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   // useState에 초기값은 ''으로 String으로 저장한다.
   // onChage의 event.target.value 값이 항상 String으로 저장되기 때문이다.
   // Amount number가 들어가는 곳도 String으로 만들었다.
@@ -85,6 +85,9 @@ const ExpenseForm = () => {
       amount: userInput.enteredAmount,
       date: new Date(userInput.enteredDate),
     };
+
+    // props로 child에서 parent component으로 값을 전달할 수 있다.
+    props.onSaveExpenseData(expenseData);
 
     console.log(expenseData);
     setUserInput({

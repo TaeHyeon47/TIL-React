@@ -58,10 +58,14 @@ const App = () => {
   //   React.createElement(Expenses, { items: expenses })
   // );
 
+  const addExpenseHandler = (NewExpense) => {
+    console.log('In App.js', NewExpense);
+  };
+
   // 옛날 방식의 React.createElement를 보면 왜 return할때 1개의 요소로 감싸야하는지 알수 있다
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
