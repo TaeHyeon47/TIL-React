@@ -78,8 +78,20 @@ const ExpenseForm = () => {
     });
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault(); // 페이지 넘어가는 것을 방지. 바닐라 자바스크립트.
+    const expenseData = {
+      title: userInput.enteredTitle,
+      amount: userInput.enteredAmount,
+      date: new Date(userInput.enteredDate),
+    };
+
+    console.log(expenseData);
+  };
+
   return (
-    <form action=''>
+    // 데이터 제출은 버튼 요소에다가 onClick을 넣는 것이 아니라, form에 onSubmit을 넣어야 한다.
+    <form onSubmit={submitHandler}>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>
           <label htmlFor=''>Title</label>
