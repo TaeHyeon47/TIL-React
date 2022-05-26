@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 
@@ -44,6 +44,8 @@ const App = () => {
     },
   ];
 
+  const [expense1, setExpense1] = useState(expenses);
+
   // 예전에는 아래와 같은 방식을 사용하여, React를 항상 import를 해주어야했음.
   // This here would be the alternative to this JSX code using React object.
   // CreateElement takes three arguments.
@@ -60,6 +62,7 @@ const App = () => {
 
   const addExpenseHandler = (NewExpense) => {
     expenses.push(NewExpense);
+    setExpense1(expenses);
     console.log(expenses);
   };
 
@@ -67,7 +70,7 @@ const App = () => {
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
+      <Expenses items={expense1} />
     </div>
   );
 };
