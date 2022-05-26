@@ -22,7 +22,7 @@ const App = () => {
   //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
   // ];
 
-  const expenses = [
+  let expenses = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -59,7 +59,8 @@ const App = () => {
   // );
 
   const addExpenseHandler = (NewExpense) => {
-    console.log('In App.js', NewExpense);
+    expenses.push(NewExpense);
+    console.log(expenses);
   };
 
   // 옛날 방식의 React.createElement를 보면 왜 return할때 1개의 요소로 감싸야하는지 알수 있다
