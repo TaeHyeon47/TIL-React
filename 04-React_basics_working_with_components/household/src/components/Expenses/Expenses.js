@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../UI/Card';
 import ExpenseItem from './ExpenseItem';
 import ExpensesFilter from './ExpensesFilter';
@@ -12,12 +12,30 @@ import './Expenses.css';
 // 리엑트 프로젝트를 진행하면 presentational, dumb component를 더 많이 가지게 된다.
 
 const Expenses = (props) => {
-  const [filteredYear, setFilteredYear] = useState('2022');
+  const [filteredYear, setFilteredYear] = useState('2021');
+  // const [filterItems, setFilterItems] = useState(props.items);
+
+  // setFilterItems((prevState) => {
+  //   return { ...prevState, sex: 'sex' };
+  // });
+
+  // console.log(aa);
+  // console.log(props.items);
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
-    console.log(props.items);
   };
+
+  const filteredExpenses = props.items.filter(
+    (expense) => expense.date.getFullYear() === Number(filteredYear)
+  );
+
+  // useEffect(() => {
+  //   const newItems = props.items.filter(
+  //     (expense) => expense.date.getFullYear() === Number(filteredYear)
+  //   );
+  //   setFilterItems(newItems);
+  // }, [filteredYear, props.items]);
 
   return (
     <div>
@@ -41,7 +59,7 @@ const Expenses = (props) => {
         */}
 
         {/* //* unique id가 없으면 map의 index argument를 사용해서 넣어도 된다. key는 number, string에 관게 없이 모두 사용가능하다. */}
-        {props.items.map((expense) => (
+        {filteredExpenses.map((expense) => (
           <ExpenseItem
             // 'key' is not a prop we are using instead of ExpenseItem
             // But instead it's a prop you can add to any component no matter if it's a custom component by you
