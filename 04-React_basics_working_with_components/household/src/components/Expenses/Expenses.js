@@ -30,6 +30,22 @@ const Expenses = (props) => {
     (expense) => expense.date.getFullYear() === Number(filteredYear)
   );
 
+  //* And we can store JSX content like this in variables.
+  //* 해당 방법으로 JSX를 덜 복잡하게 만들 수 있다.
+  let expensesContent = <p>No expenses found.</p>;
+  if (filteredExpenses.length > 0) {
+    expensesContent =
+      filteredExpenses.length > 0 &&
+      filteredExpenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ));
+  }
+
   // useEffect(() => {
   //   const newItems = props.items.filter(
   //     (expense) => expense.date.getFullYear() === Number(filteredYear)
@@ -57,19 +73,38 @@ const Expenses = (props) => {
           By using our components in JSX code, we make React aware of our component functions.
           And whenever react evaluates this JSX code, it will call these component functions.
         */}
+        {/* //? Simple dynamic expression을 활용 */}
+        {expensesContent}
 
-        {/* //* unique id가 없으면 map의 index argument를 사용해서 넣어도 된다. key는 number, string에 관게 없이 모두 사용가능하다. */}
-        {filteredExpenses.map((expense) => (
-          <ExpenseItem
-            // 'key' is not a prop we are using instead of ExpenseItem
-            // But instead it's a prop you can add to any component no matter if it's a custom component by you
-            // You should always add such a key when mapping out lists of items.
-            key={expense.id} //* key 값을 넣지않으면 overwritten. 버그가 발생한다.
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        {/* //? && 연산자를 활용한 Conditional Content
+        {filteredExpenses.length === 0 && expensesContent}
+        {filteredExpenses.length > 0 &&
+          filteredExpenses.map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))} */}
+
+        {/* //? 3항 연산자를 활용한 Conditional Content */}
+        {/* //* unique id가 없으면 map의 index argument를 사용해서 넣어도 된다. key는 number, string에 관게 없이 모두 사용가능하다.
+        {filteredExpenses.length === 0 ? (
+          <p>No expenses found.</p>
+        ) : (
+          filteredExpenses.map((expense) => (
+            <ExpenseItem
+              // 'key' is not a prop we are using instead of ExpenseItem
+              // But instead it's a prop you can add to any component no matter if it's a custom component by you
+              // You should always add such a key when mapping out lists of items.
+              key={expense.id} //* key 값을 넣지않으면 overwritten. 버그가 발생한다.
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+            />
+          ))
+        )} */}
       </Card>
     </div>
   );
