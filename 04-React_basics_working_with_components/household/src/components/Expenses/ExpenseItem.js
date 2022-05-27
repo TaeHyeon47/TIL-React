@@ -101,14 +101,14 @@ const ExpenseItem = (props) => {
 
     // between the opening and closing tags of your custom component.
     // This content between the opening and closing card tag. That is what will be available on props children inside of that card.
-
-    <Card className='expense-item'>
-      <ExpenseDate date={props.date} />
-      <div className='expense-item__description'>
-        <h2>{title}</h2>
-        <div className='expense-item__price'>${props.amount}</div>
-      </div>
-      {/* 
+    <li>
+      <Card className='expense-item'>
+        <ExpenseDate date={props.date} />
+        <div className='expense-item__description'>
+          <h2>{title}</h2>
+          <div className='expense-item__price'>${props.amount}</div>
+        </div>
+        {/* 
       In React, we add an event listener by going to the JSX element, like this button. 
       And there we add a special prop. But now it's not a prop which sets some value
       for this button, but instead it's a prop which starts with on.
@@ -117,7 +117,7 @@ const ExpenseItem = (props) => {
       which then is executed when that event occurs.
       we can create an anonymous arrow function like this. "onClick={() => {console.log('Clicked!')}}"
       */}
-      {/* 
+        {/* 
       onClick에 들어가는 함수에 ()을 넣어서 실행시키면, JSX코드가 Return될때 같이 파싱이되면서 함수가 실행되지 않는다.
       And that's important, by the way, we just point at it. We don't execute() it here.
       You don't add parentheses here.
@@ -127,12 +127,13 @@ const ExpenseItem = (props) => {
       and that would be too early.
       That's why instead we just point at the clickHandler. We pass a pointer at this function as a value to onClick,
       */}
-      {/* 
+        {/* 
       To all these built-in HTML elements, we can add supported event listeners basically.
       on입력하고 자동완성으로 나오는 이벤트를 모두 사용하면 된다.
       */}
-      <button onClick={clickHandler}>Change Title</button>
-    </Card>
+        <button onClick={clickHandler}>Change Title</button>
+      </Card>
+    </li>
   );
 };
 

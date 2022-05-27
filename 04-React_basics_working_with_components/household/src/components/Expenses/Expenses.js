@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card from '../UI/Card';
-import ExpenseItem from './ExpenseItem';
+import ExpensesList from './ExpensesList';
 import ExpensesFilter from './ExpensesFilter';
 import './Expenses.css';
 
@@ -13,14 +13,6 @@ import './Expenses.css';
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState('2021');
-  // const [filterItems, setFilterItems] = useState(props.items);
-
-  // setFilterItems((prevState) => {
-  //   return { ...prevState, sex: 'sex' };
-  // });
-
-  // console.log(aa);
-  // console.log(props.items);
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
@@ -29,22 +21,6 @@ const Expenses = (props) => {
   const filteredExpenses = props.items.filter(
     (expense) => expense.date.getFullYear() === Number(filteredYear)
   );
-
-  //* And we can store JSX content like this in variables.
-  //* 해당 방법으로 JSX를 덜 복잡하게 만들 수 있다.
-  let expensesContent = <p>No expenses found.</p>;
-  if (filteredExpenses.length > 0) {
-    expensesContent =
-      filteredExpenses.length > 0 &&
-      filteredExpenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ));
-  }
 
   // useEffect(() => {
   //   const newItems = props.items.filter(
@@ -74,7 +50,7 @@ const Expenses = (props) => {
           And whenever react evaluates this JSX code, it will call these component functions.
         */}
         {/* //? Simple dynamic expression을 활용 */}
-        {expensesContent}
+        <ExpensesList items={filteredExpenses} />
 
         {/* //? && 연산자를 활용한 Conditional Content
         {filteredExpenses.length === 0 && expensesContent}
