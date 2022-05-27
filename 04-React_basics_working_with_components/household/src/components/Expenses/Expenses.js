@@ -39,18 +39,31 @@ const Expenses = (props) => {
           By using our components in JSX code, we make React aware of our component functions.
           And whenever react evaluates this JSX code, it will call these component functions.
         */}
+
+        {/* //* unique id가 없으면 map의 index argument를 사용해서 넣어도 된다. key는 number, string에 관게 없이 모두 사용가능하다. */}
         {props.items.map((expense) => (
           <ExpenseItem
+            // 'key' is not a prop we are using instead of ExpenseItem
+            // But instead it's a prop you can add to any component no matter if it's a custom component by you
+            // You should always add such a key when mapping out lists of items.
+            key={expense.id} //* key 값을 넣지않으면 overwritten. 버그가 발생한다.
             title={expense.title}
             amount={expense.amount}
             date={expense.date}
           />
         ))}
-
-        {[<Card />, <Card />]}
       </Card>
     </div>
   );
 };
 
 export default Expenses;
+
+///////////////////////////
+// Understanding "Keys"  //
+///////////////////////////
+
+// Well React has a special concept when it comes to rendering lists of data.
+// A concept which exists to ensure that React is able to update and render such lists efficiently.
+// without performance losses, or bugs, which may occur.
+// And I wanna show you which problem we have

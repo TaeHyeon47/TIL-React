@@ -3,6 +3,28 @@ import React, { useState } from 'react';
 import NewExpense from './components/NewExpense/NewExpense';
 import Expenses from './components/Expenses/Expenses';
 
+const DUMMY_EXPENSES = [
+  {
+    id: 'e1',
+    title: 'Toilet Paper',
+    amount: 94.12,
+    date: new Date(2020, 7, 14),
+  },
+  { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
+  {
+    id: 'e3',
+    title: 'Car Insurance',
+    amount: 294.67,
+    date: new Date(2021, 2, 28),
+  },
+  {
+    id: 'e4',
+    title: 'New Desk (Wooden)',
+    amount: 450,
+    date: new Date(2021, 5, 12),
+  },
+];
+
 ///////////////////////////////////////////////////////////
 ///// The Concept of "Composition" ("children props") /////
 ///////////////////////////////////////////////////////////
@@ -15,36 +37,7 @@ import Expenses from './components/Expenses/Expenses';
 
 // 리엑트에서 컴포넌트 함수를 Arrow로 사용할 수 있다. 차이점은 없으며 오직 자신의 선호에만 달려있다.
 const App = () => {
-  // const expenses = [
-  //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
-  //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
-  //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
-  //   { title: 'Car Insurance', amount: 294.67, date: new Date(2021, 2, 28) },
-  // ];
-
-  let expenses = [
-    {
-      id: 'e1',
-      title: 'Toilet Paper',
-      amount: 94.12,
-      date: new Date(2020, 7, 14),
-    },
-    { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-    {
-      id: 'e3',
-      title: 'Car Insurance',
-      amount: 294.67,
-      date: new Date(2021, 2, 28),
-    },
-    {
-      id: 'e4',
-      title: 'New Desk (Wooden)',
-      amount: 450,
-      date: new Date(2021, 5, 12),
-    },
-  ];
-
-  const [expense1, setExpense1] = useState(expenses);
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
   // 예전에는 아래와 같은 방식을 사용하여, React를 항상 import를 해주어야했음.
   // This here would be the alternative to this JSX code using React object.
@@ -60,17 +53,29 @@ const App = () => {
   //   React.createElement(Expenses, { items: expenses })
   // );
 
-  const addExpenseHandler = (NewExpense) => {
-    expenses.push(NewExpense);
-    setExpense1(expenses);
-    console.log(expenses);
+  const addExpenseHandler = (expense) => {
+    //* 이유는 모르겠으나 push, unshift 메소드로 값을 추가하면 리엑트가 리이벨루에이션 되지 않는다.
+    //* push, unshift 메소드로 값을 넣고 다른 방법으로 리이벨루에이션을 시키면 값이 정상적으로 나오긴한다.
+    setExpenses((prevExpenses) => {
+      // const ggg = [newExpense, ...prevExpenses];
+      // prevExpenses.push(newExpense);
+      // console.log('!!!!!!!!!!!!!!!!!!');
+      // console.log('...', ggg);
+      // console.log('push', prevExpenses);
+
+      return [expense, ...prevExpenses]; // We can use the spread operator not just on objects but also on arrays.
+    });
+    // [newExpense, ...prevExpenses];
+    // expenses.push(newExpense);
+    // setExpense1(newExpense);
+    // console.log(expenses);
   };
 
   // 옛날 방식의 React.createElement를 보면 왜 return할때 1개의 요소로 감싸야하는지 알수 있다
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expense1} />
+      <Expenses items={expenses} />
     </div>
   );
 };

@@ -19,15 +19,17 @@ const ExpenseForm = (props) => {
     enteredDate: '',
   });
 
-  console.log({ ...userInput });
-
   const titleChangeHandler = (event) => {
     // setEnteredTitle(event.target.value);
 
     // State를 객체형태로 사용하기 위해서는 항상 ...으로 전체 객체를 풀어줘야한다.
-    setUserInput({
-      ...userInput, // takes an object pulls out all the key value pairs and adds them to this new object.
-      enteredTitle: event.target.value, // override "enteredTitle" key value pairs
+    // setUserInput({
+    //   ...userInput, // takes an object pulls out all the key value pairs and adds them to this new object.
+    //   enteredTitle: event.target.value, // override "enteredTitle" key value pairs
+    // });
+
+    setUserInput((prevState) => {
+      return { ...prevState, enteredTitle: event.target.value };
     });
   };
 
@@ -50,13 +52,14 @@ const ExpenseForm = (props) => {
     // And it will receive the previous state snapshot
     // and now here, we should return the new state snapshot.
     // In many cases, both will work fine, but keep in mind that I mentioned
-    // that Reacts schedules state updates, it doesn't perform them instantly.
-    // And therefore, theoretically, if you schedule a lot of state updates at the same time,
-    // you could be depending on an outdated or incorrect state snapshot
-    // if you use this approach (...userInput을 사용한 접근법).
-    // ㅑn this inner function will always be the latest state snapshot,
-    // keeping all scheduled state updates in mind. So this is the safer way
-    // to ensure that you always operate on the latest state snapshot.
+    //? State의 상태를 업데이트할 때는 항상 previous sanpshot을 가져오는 function을 사용해야지 버그를 줄일 수 있다.
+    //* that Reacts schedules state updates, it doesn't perform them instantly.
+    //* And therefore, theoretically, if you schedule a lot of state updates at the same time,
+    //* you could be depending on an outdated or incorrect state snapshot
+    //* if you use this approach (previous snapshot을 활용한 접근법)
+    //* In this inner function will always be the latest state snapshot,
+    //* keeping all scheduled state updates in mind. So this is the safer way
+    //* to ensure that you always operate on the latest state snapshot.
 
     setUserInput((prevState) => {
       return { ...prevState, enteredAmount: event.target.value };
@@ -72,9 +75,13 @@ const ExpenseForm = (props) => {
   const DateChangeHandler = (event) => {
     // setEnteredDate(event.target.value);
 
-    setUserInput({
-      ...userInput,
-      enteredDate: event.target.value,
+    // setUserInput({
+    //   ...userInput,
+    //   enteredDate: event.target.value,
+    // });
+
+    setUserInput((prevState) => {
+      return { ...prevState, enteredDate: event.target.value };
     });
   };
 
