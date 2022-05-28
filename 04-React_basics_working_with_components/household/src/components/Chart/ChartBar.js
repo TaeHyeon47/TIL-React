@@ -9,12 +9,12 @@ const ChartBar = (props) => {
   // And initially I'll set this to 0% as a text because this will be assigned as a CSS style in a second.
   let barFillHeight = '0%';
 
-  if (props.max > 0) {
+  if (props.maxValue > 0) {
     //* 아래 코드 설명
     // This will basically give us the percentage between zero and 100 by which this bar should be filled.
     // And we also wanna convert this to a string with the percentage sign at the end
     // so I will add plus percentage here, like this. (강제 형변환을 활용하여 String으로 변경!!)
-    barFillHeight = Math.round((props.value / props.maxValue) * 100 + '%');
+    barFillHeight = Math.round((props.value / props.maxValue) * 100) + '%';
   }
 
   return (

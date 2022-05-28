@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import ExpensesList from './ExpensesList';
 import ExpensesFilter from './ExpensesFilter';
+import ExpensesChart from './ExpensesChart';
 import './Expenses.css';
 
 //////////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,7 @@ const Expenses = (props) => {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
+        <ExpensesChart expenses={filteredExpenses} />
         {/* 
           HTML elements와 다르게 custom component는 대문자로 시작한다. 
           Lowercase elements are built in HTML elements. 
