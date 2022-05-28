@@ -18,6 +18,11 @@ const ExpenseForm = (props) => {
     enteredAmount: '',
     enteredDate: '',
   });
+  const [showForm, setShowForm] = useState(false);
+
+  const showFormChangeHandler = () => {
+    showForm === false ? setShowForm(true) : setShowForm(false);
+  };
 
   const titleChangeHandler = (event) => {
     // setEnteredTitle(event.target.value);
@@ -102,56 +107,215 @@ const ExpenseForm = (props) => {
       enteredAmount: '',
       enteredDate: '',
     });
+    setShowForm(false);
   };
 
-  return (
-    // 데이터 제출은 버튼 요소에다가 onClick을 넣는 것이 아니라, form에 onSubmit을 넣어야 한다.
-    <form onSubmit={submitHandler}>
-      <div className='new-expense__controls'>
-        <div className='new-expense__control'>
-          <label htmlFor=''>Title</label>
-          {/* 
-          오프닝, 클로징 태그에 아무런 요소가 없기에 input은 셀프 클로징으로 가능하다. onChange는 모든 키 입력에 반응하는 Event이다.
-          We can now implement something which is called two-way binding, which simply means
-          that for inputs we don't just listen to changes, but we can also pass a new value back into the input.
-          So that we can reset or change the input programmatically. And how do we do that? Well, it's very simple.
-           All we have to do is add the value attribute which is a default attribute, to this input element.
-          "value" will set the internal value property which every input element has.
-          And we can set it to a new value. so that when we change the state, we also change input.
+  //? variable에 JSX를 넣어서 나타낸 분기 화면
+  // let addNewExpense = (
+  //   <div className='add_new-expense__actions'>
+  //     <button type='submit' onClick={showFormChangeHandler}>
+  //       Add New Expense
+  //     </button>
+  //   </div>
+  // );
 
-          */}
-          <input
-            type='text'
-            value={userInput.enteredTitle}
-            onChange={titleChangeHandler}
-          />
+  // if (showForm === true) {
+  //   addNewExpense = (
+  //     <form onSubmit={submitHandler}>
+  //       <div className='new-expense__controls'>
+  //         <div className='new-expense__control'>
+  //           <label htmlFor=''>Title</label>
+  //           <input
+  //             type='text'
+  //             value={userInput.enteredTitle}
+  //             onChange={titleChangeHandler}
+  //           />
+  //         </div>
+  //         <div className='new-expense__control'>
+  //           <label htmlFor=''>Amount</label>
+  //           <input
+  //             type='number'
+  //             value={userInput.enteredAmount}
+  //             onChange={amountChangeHandler}
+  //             min='0.01'
+  //             step='0.01'
+  //           />
+  //         </div>
+  //         <div className='new-expense__control'>
+  //           <label htmlFor=''>Date</label>
+  //           <input
+  //             type='date'
+  //             value={userInput.enteredDate}
+  //             onChange={DateChangeHandler}
+  //             min='2019-01-01'
+  //             max='2022-12-31'
+  //           />
+  //         </div>
+  //       </div>
+
+  //       <div className='new-expense__actions'>
+  //         <button type='button'>Cancel</button>
+  //         <button type='submit'>Add Expense</button>
+  //       </div>
+  //     </form>
+  //   );
+  // }
+  return (
+    //? variable에 JSX를 넣어서 나타낸 분기 화면
+    // <div>{addNewExpense}</div>
+
+    //? && 연산자를 활용한 분기 화면
+    // <div>
+    //   {showForm === false && (
+    //     <div className='add_new-expense__actions'>
+    //       <button type='submit' onClick={showFormChangeHandler}>
+    //         Add New Expense
+    //       </button>
+    //     </div>
+    //   )}
+    //   {showForm === true && (
+    //     <form onSubmit={submitHandler}>
+    //       <div className='new-expense__controls'>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Title</label>
+    //           <input
+    //             type='text'
+    //             value={userInput.enteredTitle}
+    //             onChange={titleChangeHandler}
+    //           />
+    //         </div>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Amount</label>
+    //           <input
+    //             type='number'
+    //             value={userInput.enteredAmount}
+    //             onChange={amountChangeHandler}
+    //             min='0.01'
+    //             step='0.01'
+    //           />
+    //         </div>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Date</label>
+    //           <input
+    //             type='date'
+    //             value={userInput.enteredDate}
+    //             onChange={DateChangeHandler}
+    //             min='2019-01-01'
+    //             max='2022-12-31'
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className='new-expense__actions'>
+    //         <button>Cancel</button>
+    //         <button type='submit'>Add Expense</button>
+    //       </div>
+    //     </form>
+    //   )}
+    // </div>
+
+    //? tanery 연산자를 활용한 분기 화면
+    // <div>
+    //   {showForm === false ? (
+    //     <div className='add_new-expense__actions'>
+    //       <button type='submit' onClick={showFormChangeHandler}>
+    //         Add New Expense
+    //       </button>
+    //     </div> // 데이터 제출은 버튼 요소에다가 onClick을 넣는 것이 아니라, form에 onSubmit을 넣어야 한다.
+    //   ) : (
+    //     <form onSubmit={submitHandler}>
+    //       <div className='new-expense__controls'>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Title</label>
+    //           {/*
+    //       오프닝, 클로징 태그에 아무런 요소가 없기에 input은 셀프 클로징으로 가능하다. onChange는 모든 키 입력에 반응하는 Event이다.
+    //       We can now implement something which is called two-way binding, which simply means
+    //       that for inputs we don't just listen to changes, but we can also pass a new value back into the input.
+    //       So that we can reset or change the input programmatically. And how do we do that? Well, it's very simple.
+    //        All we have to do is add the value attribute which is a default attribute, to this input element.
+    //       "value" will set the internal value property which every input element has.
+    //       And we can set it to a new value. so that when we change the state, we also change input.
+    //       */}
+    //           <input
+    //             type='text'
+    //             value={userInput.enteredTitle}
+    //             onChange={titleChangeHandler}
+    //           />
+    //         </div>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Amount</label>
+    //           {/* 'min' and 'step' are just default HTML attributes for input elements */}
+    //           <input
+    //             type='number'
+    //             value={userInput.enteredAmount}
+    //             onChange={amountChangeHandler}
+    //             min='0.01'
+    //             step='0.01'
+    //           />
+    //         </div>
+    //         <div className='new-expense__control'>
+    //           <label htmlFor=''>Date</label>
+    //           <input
+    //             type='date'
+    //             value={userInput.enteredDate}
+    //             onChange={DateChangeHandler}
+    //             min='2019-01-01'
+    //             max='2022-12-31'
+    //           />
+    //         </div>
+    //       </div>
+
+    //       <div className='new-expense__actions'>
+    //         <button>Cancel</button>
+    //         <button type='submit'>Add Expense</button>
+    //       </div>
+    //     </form>
+    //   )}
+    // </div>
+
+    <div>
+      <form onSubmit={submitHandler}>
+        <div className='new-expense__controls'>
+          <div className='new-expense__control'>
+            <label htmlFor=''>Title</label>
+            <input
+              type='text'
+              value={userInput.enteredTitle}
+              onChange={titleChangeHandler}
+            />
+          </div>
+          <div className='new-expense__control'>
+            <label htmlFor=''>Amount</label>
+            {/* 'min' and 'step' are just default HTML attributes for input elements */}
+            <input
+              type='number'
+              value={userInput.enteredAmount}
+              onChange={amountChangeHandler}
+              min='0.01'
+              step='0.01'
+            />
+          </div>
+          <div className='new-expense__control'>
+            <label htmlFor=''>Date</label>
+            <input
+              type='date'
+              value={userInput.enteredDate}
+              onChange={DateChangeHandler}
+              min='2019-01-01'
+              max='2022-12-31'
+            />
+          </div>
         </div>
-        <div className='new-expense__control'>
-          <label htmlFor=''>Amount</label>
-          {/* 'min' and 'step' are just default HTML attributes for input elements */}
-          <input
-            type='number'
-            value={userInput.enteredAmount}
-            onChange={amountChangeHandler}
-            min='0.01'
-            step='0.01'
-          />
+
+        <div className='new-expense__actions'>
+          {/* //? type='button'을 사용하면 submit(제출)이 되지 않는다. */}
+          <button type='button' onClick={props.onCancel}>
+            Cancel
+          </button>
+          <button type='submit'>Add Expense</button>
         </div>
-        <div className='new-expense__control'>
-          <label htmlFor=''>Date</label>
-          <input
-            type='date'
-            value={userInput.enteredDate}
-            onChange={DateChangeHandler}
-            min='2019-01-01'
-            max='2022-12-31'
-          />
-        </div>
-      </div>
-      <div className='new-expense__actions'>
-        <button type='submit'>Add Expense</button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

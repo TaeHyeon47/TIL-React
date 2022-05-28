@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './NewExpense.css';
 import ExpenseForm from './ExpenseForm';
 
@@ -9,6 +9,7 @@ const NewExpense = (props) => {
   // which we will now execute in a different component.
   // even though it's not defined inside of ExpenseForm because we are passing a pointer edit
   // through the onSaveExpenseData prop.
+  const [isEditing, setIsEditing] = useState(false);
 
   const onSaveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
@@ -17,11 +18,28 @@ const NewExpense = (props) => {
     };
     console.log(expenseData);
     props.onAddExpense(expenseData);
+    setIsEditing(false);
+  };
+
+  const startEditingHandler = () => {
+    setIsEditing(true);
+  };
+
+  const stopEditingHandler = () => {
+    setIsEditing(false);
   };
 
   return (
     <div className='new-expense'>
-      <ExpenseForm onSaveExpenseData={onSaveExpenseDataHandler} />
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={onSaveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
     </div>
   );
 };
