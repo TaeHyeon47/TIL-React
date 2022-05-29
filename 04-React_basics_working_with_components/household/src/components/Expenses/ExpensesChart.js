@@ -19,6 +19,7 @@ const ExpensesChart = (props) => {
 
   for (const expense of props.expenses) {
     const expenseMonth = expense.date.getMonth(); // starting at 0 => 1월 => 0
+    console.log(expenseMonth);
     chartDataPoints[expenseMonth].value += expense.amount; // expenseMonth를 인덱스 번호로 활용
   }
 

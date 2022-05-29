@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = (props) => {
-  // useState에 초기값은 ''으로 String으로 저장한다.
+  //? useState 사용법
+  // useState에 초기값은 대부분 ''으로 String으로 저장한다.
   // onChage의 event.target.value 값이 항상 String으로 저장되기 때문이다.
-  // Amount number가 들어가는 곳도 String으로 만들었다.
-  // const [enteredTitle, setEnteredTitle] = useState('');
-  // const [enteredAmount, setEnteredAmount] = useState('');
-  // const [enteredDate, setEnteredDate] = useState('');
 
   // useState에 {}(object)를 사용하여, 그룹으로 만들어 줄 수 있다. 프로퍼티처럼 :을 사용하여 값을 입력한다.
   // the logic is kind of the same but now it's in one state object managed as one piece of state
@@ -25,12 +22,10 @@ const ExpenseForm = (props) => {
   };
 
   const titleChangeHandler = (event) => {
-    // setEnteredTitle(event.target.value);
-
-    // State를 객체형태로 사용하기 위해서는 항상 ...으로 전체 객체를 풀어줘야한다.
+    //? State를 객체형태로 사용하기 위해서는 항상 ...으로 전체 객체를 풀어줘야한다.
     // setUserInput({
-    //   ...userInput, // takes an object pulls out all the key value pairs and adds them to this new object.
-    //   enteredTitle: event.target.value, // override "enteredTitle" key value pairs
+    //   ...userInput, //? takes an object pulls out all the key value pairs and adds them to this new object.
+    //   enteredTitle: event.target.value, //? override "enteredTitle" key value pairs
     // });
 
     setUserInput((prevState) => {
@@ -39,8 +34,7 @@ const ExpenseForm = (props) => {
   };
 
   const amountChangeHandler = (event) => {
-    // setEnteredAmount(event.target.value);
-
+    //? previouse state 설명
     // whenever you update state and you depend on the previous state,
     // but also if you would be managing a counter which you increment by one, for example,
     // whenever you update your state and you depend on the previous state,
@@ -69,12 +63,6 @@ const ExpenseForm = (props) => {
     setUserInput((prevState) => {
       return { ...prevState, enteredAmount: event.target.value };
     });
-
-    // In many cases, both will work fine, but keep in mind that I mentioned
-    // that Reacts schedules state updates, it doesn't perform them instantly.
-    // And therefore, theoretically, if you schedule a lot of state updates at the same time,
-    // you could be depending on an outdated or incorrect state snapshot
-    // if you use this approach (...userInput을 사용한 접근법).
   };
 
   const DateChangeHandler = (event) => {

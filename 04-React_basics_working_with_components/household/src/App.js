@@ -26,18 +26,16 @@ const DUMMY_EXPENSES = [
   {
     id: 'e5',
     title: 'Cup',
-    amount: 30,
+    amount: 85.35,
     date: new Date(2022, 1, 23),
   },
 ];
 
-///////////////////////////////////////////////////////////
-///// The Concept of "Composition" ("children props") /////
-///////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////
+// The Concept of "Composition" ("children props") //
+/////////////////////////////////////////////////////
 // In App.js we're using Expenses, in there we are using ExpenseItem, in there we're using ExpenseDate.
 // Generally, this approach of building a user interface from smaller building blocks is called composition.
-
 // Sometimes however, you wanna have a component where you don't configure everything through props
 // but where instead you're able to pass content between the opening and closing tags of that component.
 
@@ -60,21 +58,11 @@ const App = () => {
   // );
 
   const addExpenseHandler = (expense) => {
-    //* 이유는 모르겠으나 push, unshift 메소드로 값을 추가하면 리엑트가 리이벨루에이션 되지 않는다.
-    //* push, unshift 메소드로 값을 넣고 다른 방법으로 리이벨루에이션을 시키면 값이 정상적으로 나오긴한다.
+    //* 이유는 모르겠으나 push, unshift 메소드로 값을 추가하면 리엑트가 재랜더링이 되지 않는다.
+    //* push, unshift 메소드로 값을 넣고 다른 방법으로 랜더링을 시키면 값이 정상적으로 나오긴한다.
     setExpenses((prevExpenses) => {
-      // const ggg = [newExpense, ...prevExpenses];
-      // prevExpenses.push(newExpense);
-      // console.log('!!!!!!!!!!!!!!!!!!');
-      // console.log('...', ggg);
-      // console.log('push', prevExpenses);
-
       return [expense, ...prevExpenses]; // We can use the spread operator not just on objects but also on arrays.
     });
-    // [newExpense, ...prevExpenses];
-    // expenses.push(newExpense);
-    // setExpense1(newExpense);
-    // console.log(expenses);
   };
 
   // 옛날 방식의 React.createElement를 보면 왜 return할때 1개의 요소로 감싸야하는지 알수 있다

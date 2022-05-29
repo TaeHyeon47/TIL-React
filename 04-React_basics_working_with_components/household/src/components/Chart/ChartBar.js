@@ -5,7 +5,7 @@ import './ChartBar.css';
 const ChartBar = (props) => {
   //* 차트 만들기 과정 설명
   // We need to calculate by how much this specific chart bar instance should be filled.
-  // For this we can add a variable, which we could name bar fill height but the name is up to you.
+  // For this we can add a variable, which we could name 'barFillHeight'.
   // And initially I'll set this to 0% as a text because this will be assigned as a CSS style in a second.
   let barFillHeight = '0%';
 
