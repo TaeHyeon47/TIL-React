@@ -61,7 +61,7 @@ const AddUser = (props) => {
           onConfirm={errorHandler}
         />
       )}
-      <Card className={classes.input}>
+      <div className={classes.input}>
         <form onSubmit={addUserHandler}>
           {/* 
          'htmlfor' : the prop name for assigning that for attribute to a label.
@@ -84,7 +84,7 @@ const AddUser = (props) => {
           />
           <Button type='submit'>Add User</Button>
         </form>
-      </Card>
+      </div>
     </Wrapper>
   );
 };
