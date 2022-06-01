@@ -6,6 +6,12 @@ import classes from './AddUser.module.css';
 import Wrapper from '../Helpers/Wrapper';
 import ErrorModal from '../UI/ErrorModal';
 
+/////////////////////////////////////////////
+/// Controlled vs Uncontrolled Components ///
+/////////////////////////////////////////////
+// State로 관리되면 Controlled 컴포넌트
+// useRef와 같이 State로 관리되지 않으면 UnUncontrolled 컴포넌트이다.
+
 const AddUser = (props) => {
   // Ref takes a default value you wanna initialize it to (default값은 undefined)
   // we can let React know that we wanna connect a ref to a HTML element by going to that element
@@ -54,7 +60,7 @@ const AddUser = (props) => {
 
     // Rarely use refs to manipulate the DOM.
     //? 아래와 같은 방식은 Ref가 Dom을 직접 조작하기 때문에 아주 가끔 사용해야한다.
-    nameInputRef.current.value = '';
+    nameInputRef.current.value = ''; // React를 사용하는 구문이 아니다.
     ageInputRef.current.value = '';
     // setEnteredUsername('');
     // setEnteredAge('');
@@ -100,6 +106,15 @@ const AddUser = (props) => {
             ref={nameInputRef}
           />
           <label htmlFor='age'>Age (Years)</label>
+          {/* Ref를 사용하면 uncontrolled components이다.
+          Because they're internal state, so to value which is reflected in them
+          is not controlled by react.
+          We rely on the default behavior of the input where a user of course is able to enter something
+          and that entered value is reflected.
+          And we then just Fetch it, with a react feature but we don't feed data back into the input.
+
+
+          */}
           <input
             id='age'
             type='number'
