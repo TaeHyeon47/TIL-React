@@ -4,14 +4,20 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
 
-//? Side Effects 정의
+//* Side Effects 정의
 //? HTTP Request나 LocalStorage 등 리엑트 이외의 모든 일을 가리키는 말이다.
 
-//? useEffect의 사용 이유
-//? HTTP Request를 단순히 State와 사용한다면 무한 반복 루프가 생긴다.
+//* useEffect의 사용 이유 2가지
+//* 첫째, HTTP Request를 단순히 State와 사용한다면 무한 반복 루프가 생긴다.
 //? 왜냐하면 컴포넌트 function이 다시 랜더링될때 request를 보내면서 state를 변경하게 된다.
 //? state를 변경하니 다시 컴포넌트 function이 실행되어 다시 request를 요청하고..........
-//* 이런것들을 방지하기 위해 나온 것이 바로 useEffect 훅이다.
+//? 이런것들을 방지하기 위해 나온 것이 바로 useEffect 훅이다.
+//* 둘째, we then wanna trigger another action in response to that. (다른 action을 위해 사용하기도 한다.)
+//? So checking and updating that form validity in response to a keystroke in the email or a password field,
+//? that is also something you could call a side effect.
+//? It's a side effect of the user entering data.
+//? useEffect should be executed in response to something.
+//? And something could be the component being loaded. It could be the email address being updated.
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
