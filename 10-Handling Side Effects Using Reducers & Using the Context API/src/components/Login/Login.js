@@ -4,6 +4,9 @@ import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
+// debouncing
+// once the user made a pause during typing.
+
 const Login = (props) => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
@@ -13,9 +16,19 @@ const Login = (props) => {
 
   //참고로 공백으로 들어간 []조차도 없으면 useEffect는 아무런 효과가 적용되지 않는다.
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
+    const identifier = setTimeout(() => {
+      console.log('Checking form validity!');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    // It does not run before the very first side-effect execution.
+    // 하지만 한번 실행되면, useEffect function이 실행되기 전에, retrun의 cleanup function이 먼저 실행된다.
+    return () => {
+      console.log('Clean up');
+      // clearTimeout(identifier);
+    }; // This will run as a cleanup process before useEffect executes this function the next time.
   }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
