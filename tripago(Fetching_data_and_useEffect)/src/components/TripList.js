@@ -1,37 +1,40 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useState } from 'react';
+// 훅은 다른방식으로 export가 권장된다. 해당 방식으로 진행하면 아래와 같이 {}을 넣어줘야한다.
+import { useFetch } from '../hooks/useFetch';
 import './TripList.css';
 
 const TripList = () => {
-  const [trips, setTrips] = useState([]);
+  //   const [trips, setTrips] = useState([]);
+
   // setUrl을 통해 API Endpoint를 변경할 수 있다.
   const [url, setUrl] = useState('http://localhost:3000/trips');
+  // 디스트럭쳐링한 데이터를 trips이라고 변경해서 사용한다.
+  const { data: trips } = useFetch(url);
 
-  const fetchTrips = useCallback(async () => {
-    const response = await fetch(url);
-    const json = await response.json();
-    setTrips(json);
-  }, [url]);
+  //   const fetchTrips = useCallback(async () => {
+  //     const response = await fetch(url);
+  //     const json = await response.json();
+  //     setTrips(json);
+  //   }, [url]);
 
   // useEffect안에는 async를 사용할 수 없다.
   // url State를 통해 API Endpoint가 변경될때마다 useEffect가 실행된다.
-  useEffect(() => {
-    //  fetch(url)
-    //    .then((response) => response.json())
-    //    .then((json) => setTrips(json));
-    fetchTrips();
-  }, [fetchTrips]);
+  //   useEffect(() => {
+  //     fetchTrips();
+  //   }, [fetchTrips]);
 
-  console.log(trips);
   return (
     <div className='trip-list'>
       <h2>TripList</h2>
       <ul>
-        {trips.map((trip) => (
-          <li key={trip.id}>
-            <h3>{trip.title}</h3>
-            <h3>{trip.price}</h3>
-          </li>
-        ))}
+        {/* 커스텀 훅의 초기값이 null이기 때문에 "trips &&" 연산을 추가해주어야 한다. */}
+        {trips &&
+          trips.map((trip) => (
+            <li key={trip.id}>
+              <h3>{trip.title}</h3>
+              <h3>{trip.price}</h3>
+            </li>
+          ))}
       </ul>
       <div className='filters'>
         {/*
