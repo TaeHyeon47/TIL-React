@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // 아래와 같은 방식으로 export하면 import할 때 {}가 필요하다.
-export const useFetch = (url) => {
+export const useFetch = (url, _options) => {
   // 데이터를 받아와서 생성하기 전에 null 값이 return된다.
   // 따라서 받아서 사용하는 컴포넌트의 배열 메소드 앞에는 항상 && 연산자로 추가 로직을 넣어야한다..
   const [data, setData] = useState(null);
-  // 로딩 State
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
+  //? use useRef to wrap an object/array argument
+  //? which is a useEffect dependency
+  const options = useRef(_options).current;
+
   useEffect(() => {
+    console.log(options);
     const controller = new AbortController();
 
     // useEffect에 바로 async를 사용할 수는 없지만 아래와 같이 function에는 사용할 수 있다.
@@ -53,7 +57,7 @@ export const useFetch = (url) => {
     return () => {
       controller.abort();
     };
-  }, [url]);
+  }, [url, options]);
 
   // 커스텀 훅에서는 일반적으로 State와 비슷하게 Array로 반환한다.
   // 또는 아래와 같이 object로 반환한다.

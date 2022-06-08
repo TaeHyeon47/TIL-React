@@ -9,7 +9,7 @@ const TripList = () => {
   // setUrl을 통해 API Endpoint를 변경할 수 있다.
   const [url, setUrl] = useState('http://localhost:3000/trips');
   // 디스트럭쳐링한 데이터를 trips이라고 변경해서 사용한다.
-  const { data: trips, isPending, error } = useFetch(url);
+  const { data: trips, isPending, error } = useFetch(url, { type: 'GET' });
 
   //   const fetchTrips = useCallback(async () => {
   //     const response = await fetch(url);
