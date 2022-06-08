@@ -9,7 +9,7 @@ const TripList = () => {
   // setUrl을 통해 API Endpoint를 변경할 수 있다.
   const [url, setUrl] = useState('http://localhost:3000/trips');
   // 디스트럭쳐링한 데이터를 trips이라고 변경해서 사용한다.
-  const { data: trips } = useFetch(url);
+  const { data: trips, isPending, error } = useFetch(url);
 
   //   const fetchTrips = useCallback(async () => {
   //     const response = await fetch(url);
@@ -26,6 +26,8 @@ const TripList = () => {
   return (
     <div className='trip-list'>
       <h2>TripList</h2>
+      {isPending && <div>Loading rips....</div>}
+      {error && <div>{error}</div>}
       <ul>
         {/* 커스텀 훅의 초기값이 null이기 때문에 "trips &&" 연산을 추가해주어야 한다. */}
         {trips &&
