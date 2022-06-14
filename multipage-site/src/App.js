@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Article from './pages/Article';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <NavLink to='/about'>About</NavLink>
           <NavLink to='/contact'>Contact</NavLink>
         </nav>
-        Nav
+
         {/* 특정한 route에 접근할 때, React router는 Top에서 Bottom으로 매치된다. */}
         {/* '/about'를 입력하면 '/'가 먼저 매치되고, Switch로 묶여 있어 뒤에 있는 About 컴포넌트가 나오지 않는다. */}
         {/* 이를 방지하기 위해 exact prop을 넣어야한다. 이는 정확하게 입력한 경우에만 나온다는 뜻이다. */}
@@ -40,6 +41,11 @@ function App() {
           </Route>
           <Route path='/contact'>
             <Contact />
+          </Route>
+          {/*//? :은 react router에게 값이 바뀌는 "router parameter"라는 것을 알려준다. */}
+          {/* 이름은 id가 아닌 다양하게 지여도 상관없지만, :을 사용하여 값이 바뀔 수 있는 부분이라고 명시를 해야한다. */}
+          <Route path='/articles/:id'>
+            <Article />
           </Route>
         </Switch>
       </BrowserRouter>
