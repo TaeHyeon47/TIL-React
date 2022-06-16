@@ -4,7 +4,14 @@ import './App.css';
 // Switch는 한번에 1개의 컴포넌트만 보여준다는 것이다.
 // Link를 사용하여 anchor(a) tag를 서버의 요청하지 않는 방식으로 대체할 수 있다. (실제로 a tag로 output된다.)
 // NavLink는 네비게이션에 사용되며, 현재 위치를 나타내는 네비에 .active 클래스가 자동으로 적용되어 CSS 사용할 수 있다. (css 파일 참조)
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
+// react-router-dom에서 Redirect 컴포넌트를 기본적으로 제공해준다.
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  NavLink,
+  Redirect,
+} from 'react-router-dom';
 
 // page components
 import Home from './pages/Home';
@@ -46,6 +53,11 @@ function App() {
           {/* 이름은 id가 아닌 다양하게 지여도 상관없지만, :을 사용하여 값이 바뀔 수 있는 부분이라고 명시를 해야한다. */}
           <Route path='/articles/:id'>
             <Article />
+          </Route>
+          {/*//? *는 모든 주소를 의미한다.  */}
+          {/* React router는 위에서 아래로 컴파일이 되기 때문에 상기에 작성한 주소가 없는 경우 최종적으로 아래의 주소가 실행된다. */}
+          <Route path='*'>
+            <Redirect to='/' />
           </Route>
         </Switch>
       </BrowserRouter>
